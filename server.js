@@ -19,7 +19,7 @@ app.use('/allFlights',allFlights);
 
 
 app.get('/',(req,res)=>{
-    res.send('start building code');
+    res.send('inbound and outbound flights from tel aviv');
 })
 
 
