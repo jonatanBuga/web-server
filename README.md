@@ -120,3 +120,10 @@ The API provides several routes for accessing flight data. Below is a list of th
 - URL: http://localhost:8080/outbound/numberFromCountry?country=<country_name>
 - Parameters: country (string)
 - Get the number of outbound flights from a specific country
+
+
+## Docker
+
+Docker file name : web-server-inbound-outbound.
+
+for running image : docker run -p 8080:8080 web-server-inbound-outbound
