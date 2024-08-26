@@ -42,7 +42,6 @@ export const getNumberFromCountry = async (req,res)=>{
         const specificCountry = flights.filter(flights=>flights['CHLOCCT']===country) //CHLOCCT gives us country name  
 
         res.json({
-            "country":country,
             "number":specificCountry.length
         });
     } catch(err){
@@ -68,9 +67,13 @@ export const delayedFlights = async (req,res)=>{
             const estimatedTime = new Date(flight['CHSTOL']);
             const realTime = new Date(flight['CHPTOL']);
 
-            if(realTime-estimatedTime>0)//means that fligth went after his estimated Time
-                delayedOutboundNumber+=1;
-            
+            const sameDay = estimatedTime.getUTCFullYear() === realTime.getUTCFullYear() && 
+            estimatedTime.getUTCMonth() === realTime.getUTCMonth() && estimatedTime.getUTCDate() === realTime.getUTCDate();
+
+            if(sameDay){
+                if((realTime-estimatedTime)/(1000*60)>0)//means that fligth went after his estimated Time in minutes
+                    delayedOutboundNumber+=1;
+            }
         })
 
 
@@ -125,5 +128,57 @@ export const popularDestination = async (req,res)=>{
     } catch(err){
         console.error(err);
         res.status(500).json({error:"faild to fetch inbound flights"});
+    }
+}
+
+export const quickGetaway = async(req,res)=>{
+    try{
+        const response = await axios.get(base_url,{
+            params:{
+                resource_id:RESOURCE_ID,
+                limit:LIMIT
+            }
+        });
+
+
+        const flights = response.data.result.records; // array of flights records ,each element is flight object.
+        const outboundeFromIsrael = flights.filter(flight => flight['CHCINT'] && flight['CHCKZN']);//if both not empty=> outbound flight
+        const inboundToIsrael = flights.filter(flight => !flight['CHCINT'] && !flight['CHCKZN']);//INBOUND
+
+        let quickGetawayFlights = []
+        outboundeFromIsrael.forEach(flightOut=>{
+            const dateTimeOfFlightout = new Date(flightOut['CHPTOL']);
+            inboundToIsrael.forEach(flightIn=>{
+                const dateTimeOfFlightIn = new Date(flightIn['CHSTOL']);
+                const sameDay = dateTimeOfFlightout.getUTCFullYear() === dateTimeOfFlightIn.getUTCFullYear() && 
+                dateTimeOfFlightout.getUTCMonth() === dateTimeOfFlightIn.getUTCMonth() && dateTimeOfFlightout.getUTCDate() === dateTimeOfFlightIn.getUTCDate();
+                
+
+                const differenceBetween =(dateTimeOfFlightIn-dateTimeOfFlightout)/(1000 * 60 * 60) // in hours 
+                if(flightOut['CHLOC1']===flightIn['CHLOC1']){
+                    //considerion same date for quick flight
+                    if (sameDay){
+                        //considerion diffrence between flights, 21 is after 3 hours decrese of check in at airport
+                        if(differenceBetween>0 && differenceBetween<21){
+                            quickGetawayFlights.push({
+                                "departure":flightOut['CHOPER']+flightOut['CHFLTN'],
+                                "arrival":flightIn['CHOPER']+flightIn['CHFLTN'],
+                                "country": flightOut['CHLOC1']+","+flightIn['CHLOC1'],
+                                "date":dateTimeOfFlightout+','+dateTimeOfFlightIn
+                            })
+                        }
+                    }
+                }
+                
+            })
+        })
+
+        res.json({
+            quickGetawayFlights
+        });
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error:"faild to fetch inbound&outbound flights for get away"});
     }
 }

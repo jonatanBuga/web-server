@@ -40,7 +40,6 @@ export const getNumberFromCountry = async (req,res) =>{
         const inboundFlights = flights.filter(flights => flights['CHLOCCT'] === country && (flights['CHCINT'] && flights['CHCKZN'])); //if CHCINT AND CHCKZN not empty=> outbound flight AND CHLOCCT gives us country
 
         res.json({
-            "country":country,
             "number":inboundFlights.length
         })
     }catch(err){
