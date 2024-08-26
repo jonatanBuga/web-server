@@ -38,7 +38,6 @@ To start the server, run the following command in your terminal:
 ```bash
 npm run start
 
-By default, the server will start on localhost at port 8080.
 ```
 
 ## 
