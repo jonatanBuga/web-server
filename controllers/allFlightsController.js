@@ -156,9 +156,9 @@ export const quickGetaway = async(req,res)=>{
 
                 const differenceBetween =(dateTimeOfFlightIn-dateTimeOfFlightout)/(1000 * 60 * 60) // in hours 
                 if(flightOut['CHLOC1']===flightIn['CHLOC1']){
-                    //considerion same date for quick flight
+                    //consider same date for quick flight
                     if (sameDay){
-                        //considerion diffrence between flights, 21 is after 3 hours decrese of check in at airport
+                        //consider diffrence between flights, 21 is after 3 hours decrese of check in at airport
                         if(differenceBetween>0 && differenceBetween<21){
                             quickGetawayFlights.push({
                                 "departure":flightOut['CHOPER']+flightOut['CHFLTN'],
@@ -179,6 +179,6 @@ export const quickGetaway = async(req,res)=>{
     }
     catch(err){
         console.error(err);
-        res.status(500).json({error:"faild to fetch inbound&outbound flights for get away"});
+        res.status(400).json({error:"faild to fetch inbound&outbound flights for get away"});
     }
 }

@@ -3,7 +3,7 @@ import express from "express";
 import inboundRoute from "./routes/inbound.js"
 import outboundRoute from "./routes/outbound.js";
 import allFlights from "./routes/allFligths.js";
-const PORT = 6500
+const PORT = 8080
 //setup app
 const app = express()
 
