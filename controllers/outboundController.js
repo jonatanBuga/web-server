@@ -1,13 +1,13 @@
-const axios = require("axios");
+import axios from "axios";
 
 const BASE_URL = "https://data.gov.il/api/3/action/datastore_search";
 const RESOURCE_ID = 'e83f763b-b7d7-479e-b172-ae981ddc6de5';
 const LIMIT =300;
 
 //getting number of all outnbound Flights
-const getNumberOfOutboundFlights = async (req,res) =>{
+export const getNumberOfOutboundFlights = async (req,res) =>{
     try {
-        const response = await axios.get(`${BASE_URL}`,{
+        const response = await axios.get(BASE_URL,{
             params:{
                 resource_id:RESOURCE_ID,
                 limit:LIMIT
@@ -26,10 +26,10 @@ const getNumberOfOutboundFlights = async (req,res) =>{
 }
 
 //getting the number of outbounding flights frn specific country
-const getNumberFromCountry = async (req,res) =>{
+export const getNumberFromCountry = async (req,res) =>{
     const country = req.query.country; 
     try{
-        const response = await axios.get(`${BASE_URL}`,{
+        const response = await axios.get(BASE_URL,{
             params:{
                 resource_id:RESOURCE_ID,
                 limit:LIMIT
@@ -50,4 +50,3 @@ const getNumberFromCountry = async (req,res) =>{
 }
 
 
-module.exports = {getNumberOfOutboundFlights,getNumberFromCountry};

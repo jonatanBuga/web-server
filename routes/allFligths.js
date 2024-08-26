@@ -1,11 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const path = require("path");
-const {getAllFlightsNumber,delayedFlights,popularDestination,getNumberFromCountry} = require('../controllers/allFlightsController');
+import express from "express";
+import {getAllFlightsNumber,delayedFlights,popularDestination,getNumberFromCountry} from '../controllers/allFlightsController.js';
 
+const router = express.Router();
 
 router.get('/amount',getAllFlightsNumber);
 router.get('/numberFromCountry',getNumberFromCountry);
 router.get('/delayedNumber',delayedFlights);
 router.get('/popular',popularDestination);
-module.exports = router;
+
+export default router;

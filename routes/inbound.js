@@ -1,11 +1,9 @@
-const express = require("express");
+import express from "express";
+import {getNumberOfInboundFlights,getNumberFromCountry} from '../controllers/inboundController.js';
+
 const router = express.Router();
-const path = require("path");
-const {getNumberOfInboundFlights,getNumberFromCountry} = require('../controllers/inboundController');
-
-
 
 router.get('/amount',getNumberOfInboundFlights);
 router.get('/numberFromCountry',getNumberFromCountry);
 
-module.exports = router;
+export default router;

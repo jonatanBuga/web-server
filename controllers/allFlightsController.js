@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios";
 
 const base_url = "https://data.gov.il/api/3/action/datastore_search";
 const RESOURCE_ID = 'e83f763b-b7d7-479e-b172-ae981ddc6de5';
@@ -6,9 +6,9 @@ const LIMIT =300;
 
 
 //getting number of all Flights
-const getAllFlightsNumber = async (req,res) =>{
+export const getAllFlightsNumber = async (req,res) =>{
     try {
-        const response = await axios.get(`${base_url}`,{
+        const response = await axios.get(base_url,{
             params:{
                 resource_id:RESOURCE_ID,
                 limit:LIMIT
@@ -28,10 +28,10 @@ const getAllFlightsNumber = async (req,res) =>{
         res.status(500).json({error:"faild to fetch inbound flights"});
     }
 }
-const getNumberFromCountry = async (req,res)=>{
+export const getNumberFromCountry = async (req,res)=>{
     const country = req.query.country; 
     try {
-        const response = await axios.get(`${base_url}`,{
+        const response = await axios.get(base_url,{
             params:{
                 resource_id:RESOURCE_ID,
                 limit:LIMIT
@@ -51,9 +51,9 @@ const getNumberFromCountry = async (req,res)=>{
     }
 }
 //getting the number of delayed flights
-const delayedFlights = async (req,res)=>{
+export const delayedFlights = async (req,res)=>{
     try {
-        const response = await axios.get(`${base_url}`,{
+        const response = await axios.get(base_url,{
             params:{
                 resource_id:RESOURCE_ID,
                 limit:LIMIT
@@ -84,9 +84,9 @@ const delayedFlights = async (req,res)=>{
     }
 }
 //getting popular destination city from tel aviv airport. return string of city
-const popularDestination = async (req,res)=>{
+export const popularDestination = async (req,res)=>{
     try {
-        const response = await axios.get(`${base_url}`,{
+        const response = await axios.get(base_url,{
             params:{
                 resource_id:RESOURCE_ID,
                 limit:LIMIT
@@ -127,4 +127,3 @@ const popularDestination = async (req,res)=>{
         res.status(500).json({error:"faild to fetch inbound flights"});
     }
 }
-module.exports = {getAllFlightsNumber,delayedFlights,popularDestination,getNumberFromCountry};
