@@ -66,7 +66,7 @@ The API provides several routes for accessing flight data. Below is a list of th
 2. 
 - Endpoint: /allFlight/numberFromCountry
 - Method: GET
-- URL: http://localhost:8080/allFlight/numberFromCountry
+- URL: http://localhost:8080/allFlight/numberFromCountry?country=<country_name>
 - Parameters: country (string)
 - Get the number of inbound and outbound flights from a specific country
 
@@ -102,7 +102,7 @@ The API provides several routes for accessing flight data. Below is a list of th
 2. 
 - Endpoint: /inbound/numberFromCountry
 - Method: GET
-- URL: http://localhost:8080/inbound/numberFromCountry
+- URL: http://localhost:8080/inbound/numberFromCountry?country=<country_name>
 - Parameters: country (string)
 - Get the number of inbound flights from a specific country:
 
@@ -118,6 +118,6 @@ The API provides several routes for accessing flight data. Below is a list of th
 2. 
 - Endpoint: /outbound/numberFromCountry
 - Method: GET
-- URL: http://localhost:8080/outbound/numberFromCountry
+- URL: http://localhost:8080/outbound/numberFromCountry?country=<country_name>
 - Parameters: country (string)
 - Get the number of outbound flights from a specific country
