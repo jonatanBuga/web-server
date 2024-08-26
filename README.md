@@ -58,34 +58,34 @@ The API provides several routes for accessing flight data. Below is a list of th
 1. 
 - Endpoint: /allFlights/amount
 - Method: GET
-- URL: http://localhost:8080/allFlight/amount
+- URL: http://localhost:8080/allFlights/amount
 - Get the total number of all inbound and outbound flights
 
 
 2. 
 - Endpoint: /allFlights/numberFromCountry
 - Method: GET
-- URL: http://localhost:8080/allFlight/numberFromCountry?country=<country_name>
+- URL: http://localhost:8080/allFlights/numberFromCountry?country=<country_name>
 - Parameters: country (string)
 - Get the number of inbound and outbound flights from a specific country
 
 3. 
 - Endpoint: /allFlights/delayedNumber
 - Method: GET
-- URL: http://localhost:8080/allFlight/delayedNumber
+- URL: http://localhost:8080/allFlights/delayedNumber
 - Get the number of delayed flights (inbound and outbound together)
 
 4. 
 - Endpoint: /allFlights/popular
 - Method: GET
-- URL: http://localhost:8080/allFlight/popular
+- URL: http://localhost:8080/allFlights/popular
 - Get the most popular destination city
 
 
 5. 
 - Endpoint: /allFlights/quickFlight
 - Method: GET
-- URL: http://localhost:8080/allFlight/quickFlight
+- URL: http://localhost:8080/allFlights/quickFlight
 - Get a quick getaway flight (if available)
 
 ## B. Inbound Routes
