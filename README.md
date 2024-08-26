@@ -38,7 +38,6 @@ To start the server, run the following command in your terminal:
 ```bash
 npm run start
 
-By default, the server will start on localhost at port 8080.
 ```
 
 ## 
@@ -57,34 +56,34 @@ The API provides several routes for accessing flight data. Below is a list of th
 
 
 1. 
-- Endpoint: /allFlight/amount
+- Endpoint: /allFlights/amount
 - Method: GET
 - URL: http://localhost:8080/allFlight/amount
 - Get the total number of all inbound and outbound flights
 
 
 2. 
-- Endpoint: /allFlight/numberFromCountry
+- Endpoint: /allFlights/numberFromCountry
 - Method: GET
 - URL: http://localhost:8080/allFlight/numberFromCountry?country=<country_name>
 - Parameters: country (string)
 - Get the number of inbound and outbound flights from a specific country
 
 3. 
-- Endpoint: /allFlight/delayedNumber
+- Endpoint: /allFlights/delayedNumber
 - Method: GET
 - URL: http://localhost:8080/allFlight/delayedNumber
 - Get the number of delayed flights (inbound and outbound together)
 
 4. 
-- Endpoint: /allFlight/popular
+- Endpoint: /allFlights/popular
 - Method: GET
 - URL: http://localhost:8080/allFlight/popular
 - Get the most popular destination city
 
 
 5. 
-- Endpoint: /allFlight/quickFlight
+- Endpoint: /allFlights/quickFlight
 - Method: GET
 - URL: http://localhost:8080/allFlight/quickFlight
 - Get a quick getaway flight (if available)
