@@ -16,8 +16,8 @@ export const getAllFlightsNumber = async (req,res) =>{
         });
 
         const flights = response.data.result.records; // array of flights records ,each element is flight object.
-        const outboundFlights = flights.filter(flights=>flights['CHCINT'] && flights['CHCKZN']) //if both not empty=> outbound flight  
-        const inboundFlights = flights.filter(flights => !flights['CHCINT'] && !flights['CHCKZN']);//if both empty=> inbound flight 
+        const outboundFlights = flights.filter(flight=>flight['CHCINT'] && flight['CHCKZN']) //if both not empty=> outbound flight  
+        const inboundFlights = flights.filter(flight => !flight['CHCINT'] && !flight['CHCKZN']);//if both empty=> inbound flight 
 
         const total_amount = outboundFlights.length + inboundFlights.length
         res.json({
@@ -39,7 +39,7 @@ export const getNumberFromCountry = async (req,res)=>{
         });
 
         const flights = response.data.result.records; // array of flights records ,each element is flight object.
-        const specificCountry = flights.filter(flights=>flights['CHLOCCT']===country) //CHLOCCT gives us country name  
+        const specificCountry = flights.filter(flight=>flight['CHLOCCT']===country) //CHLOCCT gives us country name  
 
         res.json({
             "number":specificCountry.length
@@ -110,7 +110,7 @@ export const popularDestination = async (req,res)=>{
         });
 
 
-        //find the city with maximum outbound flight
+        //find the city with maximum outbound flight, if there more then one city with popular outbound return just one of them
         let cityName='';
         let maxOutbound =0;
         for(const city in cityMap){
@@ -123,7 +123,7 @@ export const popularDestination = async (req,res)=>{
 
 
         res.json({
-            "name":cityName,
+            "name":cityMap,
         });
     } catch(err){
         console.error(err);
@@ -163,8 +163,6 @@ export const quickGetaway = async(req,res)=>{
                             quickGetawayFlights.push({
                                 "departure":flightOut['CHOPER']+flightOut['CHFLTN'],
                                 "arrival":flightIn['CHOPER']+flightIn['CHFLTN'],
-                                "country": flightOut['CHLOC1']+","+flightIn['CHLOC1'],
-                                "date":dateTimeOfFlightout+','+dateTimeOfFlightIn
                             })
                         }
                     }

@@ -16,7 +16,7 @@ export const getNumberOfInboundFlights = async (req,res) =>{
         });
 
         const flights = response.data.result.records; // array of flights records ,each element is flight object.
-        const inboundFlights = flights.filter(flights => !flights['CHCINT'] && !flights['CHCKZN']);//if both empty=> inbound flight 
+        const inboundFlights = flights.filter(flight => !flight['CHCINT'] && !flight['CHCKZN']);//if both empty=> inbound flight 
 
         res.json({
             "number":inboundFlights.length
@@ -38,7 +38,7 @@ export const getNumberFromCountry = async (req,res) =>{
         });
 
         const flights = response.data.result.records; // array of flights records ,each element is flight object.
-        const inboundFlights = flights.filter(flights => flights['CHLOCCT'] === country && (!flights['CHCINT'] && !flights['CHCKZN']));////if CHCINT AND CHCKZN  empty=> inbound flight AND CHLOCCT gives us country 
+        const inboundFlights = flights.filter(flight => flight['CHLOCCT'] === country && (!flight['CHCINT'] && !flight['CHCKZN']));////if CHCINT AND CHCKZN  empty=> inbound flight AND CHLOCCT gives us country 
 
         res.json({
             "number":inboundFlights.length
