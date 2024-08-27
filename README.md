@@ -1,4 +1,4 @@
-# Project Title
+# Web Server 
 
 small web-server that gives information on inbound and outbound flights from TLV airport.
 It provides endpoints for querying data related to inbound, outbound, and delayed flights, popular destinations, and quick getaways
